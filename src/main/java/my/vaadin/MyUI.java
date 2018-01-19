@@ -2,11 +2,12 @@ package my.vaadin;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.shared.ui.ValueChangeMode;
+import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import my.vaadin.app.Customer;
 import my.vaadin.app.CustomerService;
 
@@ -26,6 +27,8 @@ public class MyUI extends UI {
 
     private CustomerService service = CustomerService.getInstance();
     private Grid<Customer> grid = new Grid<>(Customer.class);
+    private TextField filterText = new TextField();
+    private Button clearFilterTextBtn = new Button(FontAwesome.TIMES);
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -33,8 +36,19 @@ public class MyUI extends UI {
 
         grid.setColumns("firstName", "lastName", "email");
 
+        filterText.setPlaceholder("filter by name");
+        filterText.addValueChangeListener(e -> updateList());
+        filterText.setValueChangeMode(ValueChangeMode.LAZY);
+
+
+        CssLayout filtering = new CssLayout();
+        filtering.addComponents( filterText, clearFilterTextBtn);
+        filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
+
         // add Grid to the layout
-        layout.addComponents(grid);
+        layout.addComponents(filtering, grid);
+
+
         updateList();
 
 
@@ -43,7 +57,7 @@ public class MyUI extends UI {
 
     private void updateList() {
         // fetch list of Customers from service and assign it to Grid
-        List<Customer> customers = service.findAll();
+        List<Customer> customers = service.findAll( filterText.getValue());
         grid.setItems(customers);
     }
 
