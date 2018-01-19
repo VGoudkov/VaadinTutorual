@@ -30,6 +30,8 @@ public class MyUI extends UI {
     private TextField filterText = new TextField();
     private Button clearFilterTextBtn = new Button(FontAwesome.TIMES);
 
+    private CustomerForm form = new CustomerForm( this);
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
@@ -45,17 +47,34 @@ public class MyUI extends UI {
         filtering.addComponents( filterText, clearFilterTextBtn);
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 
-        // add Grid to the layout
-        layout.addComponents(filtering, grid);
+
+        HorizontalLayout main = new HorizontalLayout( grid, form);
+        main.setSizeFull();
+        grid.setSizeFull();
+        main.setExpandRatio(grid,1);
+
+        layout.addComponents(filtering, main);
 
 
         updateList();
 
+        form.setVisible(false);
+
+
+        grid.asSingleSelect().addValueChangeListener( e->{
+            if (e.getValue() == null) {
+
+                form.setVisible( false);
+            }
+            else {
+                form.setCustomer( e.getValue());
+            }
+        });
 
         setContent(layout);
     }
 
-    private void updateList() {
+    void updateList() {
         // fetch list of Customers from service and assign it to Grid
         List<Customer> customers = service.findAll( filterText.getValue());
         grid.setItems(customers);
