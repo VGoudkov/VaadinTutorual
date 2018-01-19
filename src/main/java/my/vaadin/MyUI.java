@@ -42,10 +42,19 @@ public class MyUI extends UI {
         filterText.addValueChangeListener(e -> updateList());
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
 
+        Button addCustomerBtn = new Button("Add new customer");
+        addCustomerBtn.addClickListener(e->{
+            grid.asSingleSelect().clear();
+            form.setCustomer( new Customer());
+        });
+
 
         CssLayout filtering = new CssLayout();
         filtering.addComponents( filterText, clearFilterTextBtn);
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
+
+
+        HorizontalLayout toolbar = new HorizontalLayout(filtering,addCustomerBtn);
 
 
         HorizontalLayout main = new HorizontalLayout( grid, form);
@@ -53,7 +62,7 @@ public class MyUI extends UI {
         grid.setSizeFull();
         main.setExpandRatio(grid,1);
 
-        layout.addComponents(filtering, main);
+        layout.addComponents(toolbar, main);
 
 
         updateList();
