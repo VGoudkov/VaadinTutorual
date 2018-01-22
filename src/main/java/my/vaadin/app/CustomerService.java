@@ -161,25 +161,43 @@ public class CustomerService {
      */
     public void ensureTestData() {
         if (findAll().isEmpty()) {
-            final String[] names = new String[] { "Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
-                    "Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
-                    "Emily Stewart", "Corinne Davis", "Ryann Davis", "Yurem Jackson", "Kelly Gustavsson",
-                    "Eileen Walker", "Katelyn Martin", "Israel Carlsson", "Quinn Hansson", "Makena Smith",
-                    "Danielle Watson", "Leland Harris", "Gunner Karlsen", "Jamar Olsson", "Lara Martin",
-                    "Ann Andersson", "Remington Andersson", "Rene Carlsson", "Elvis Olsen", "Solomon Olsen",
-                    "Jaydan Jackson", "Bernard Nilsen" };
-            Random r = new Random(0);
-            for (String name : names) {
-                String[] split = name.split(" ");
-                Customer c = new Customer();
-                c.setFirstName(split[0]);
-                c.setLastName(split[1]);
-                c.setEmail(split[0].toLowerCase() + "@" + split[1].toLowerCase() + ".com");
-                c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
-                int daysOld = 0 - r.nextInt(365 * 15 + 365 * 60);
-                c.setBirthDate(LocalDate.now().plusDays(daysOld));
-                save(c);
-            }
+            generateVaadinData();
+            //generate500KRecords();
+        }
+    }
+
+    private void generateVaadinData() {
+        final String[] names = new String[] { "Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
+                "Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
+                "Emily Stewart", "Corinne Davis", "Ryann Davis", "Yurem Jackson", "Kelly Gustavsson",
+                "Eileen Walker", "Katelyn Martin", "Israel Carlsson", "Quinn Hansson", "Makena Smith",
+                "Danielle Watson", "Leland Harris", "Gunner Karlsen", "Jamar Olsson", "Lara Martin",
+                "Ann Andersson", "Remington Andersson", "Rene Carlsson", "Elvis Olsen", "Solomon Olsen",
+                "Jaydan Jackson", "Bernard Nilsen" };
+        Random r = new Random(0);
+        for (String name : names) {
+            String[] split = name.split(" ");
+            Customer c = new Customer();
+            c.setFirstName(split[0]);
+            c.setLastName(split[1]);
+            c.setEmail(split[0].toLowerCase() + "@" + split[1].toLowerCase() + ".com");
+            c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
+            int daysOld = 0 - r.nextInt(365 * 15 + 365 * 60);
+            c.setBirthDate(LocalDate.now().plusDays(daysOld));
+            save(c);
+        }
+    }
+    private void generate500KRecords() {
+        Random r = new Random(0);
+        for (int i=0; i< 500_000; i++) {
+            Customer c = new Customer();
+            c.setFirstName("Name"+i);
+            c.setLastName("LastName"+i);
+            c.setEmail("customer"+i+"@customercompany.com");
+            c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
+            int daysOld = 0 - r.nextInt(365 * 15 + 365 * 60);
+            c.setBirthDate(LocalDate.now().plusDays(daysOld));
+            save(c);
         }
     }
 
