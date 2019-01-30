@@ -5,6 +5,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -40,6 +41,10 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
+        Label header = new Label("<b>ITDExpert</b> Vaadin sample app");
+        header.setContentMode(ContentMode.HTML);
+
         final VerticalLayout layout = new VerticalLayout();
 
         grid.setColumns("firstName", "lastName", "email");
@@ -68,7 +73,7 @@ public class MyUI extends UI {
         grid.setSizeFull();
         main.setExpandRatio(grid,1);
 
-        layout.addComponents(toolbar, main);
+        layout.addComponents(header, toolbar, main);
 
 
         updateList();
