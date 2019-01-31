@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="default-persistence-unit/Hibernate" uuid="d9235b45-23a1-4b4b-b41d-0b779b77b7aa">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/_VGoudkov/Dev/JavaVaadin/VaadinTutorial/src/main/resources/persistence.xml</remarks>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:file:~/app_db</jdbc-url>
+    </data-source>
+  </component>
+</project>

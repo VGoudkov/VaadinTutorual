@@ -1,5 +1,7 @@
 package my.vaadin.app;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -8,8 +10,10 @@ import java.time.LocalDate;
  * application this could for example be a JPA entity.
  */
 @SuppressWarnings("serial")
+@Entity
 public class Customer implements Serializable, Cloneable {
 
+    @Id
     private Long id;
 
     private String firstName = "";

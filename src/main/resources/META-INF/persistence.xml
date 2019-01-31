@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="default-persistence-unit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+
+        <class>my.vaadin.app.Customer</class>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:file:~/app_db"/>
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbc.JDBCDriver"/>
+            <property name="hibernate.connection.username" value="sa"/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+
+            <!--validate: validate the schema, makes no changes to the database.-->
+            <!--update: update the schema.-->
+            <!--create: creates the schema, destroying previous data.-->
+            <!--create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped-->
+            <property name="hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
