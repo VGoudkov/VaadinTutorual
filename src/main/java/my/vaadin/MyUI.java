@@ -12,6 +12,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import my.vaadin.app.Customer;
 import my.vaadin.app.CustomerService;
 import my.vaadin.app.LoginDailog;
+import my.vaadin.app.UserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +44,7 @@ public class MyUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
-        LoginDailog loginDailog = new LoginDailog();
+        LoginDailog loginDailog = new LoginDailog( this::onSuccesLogin);
         addWindow( loginDailog);
 
         Label header = new Label("<b>ITDExpert</b> Vaadin sample app");
@@ -80,7 +81,7 @@ public class MyUI extends UI {
         layout.addComponents(header, toolbar, main);
 
 
-        updateList();
+
 
         form.setVisible(false);
 
@@ -96,6 +97,10 @@ public class MyUI extends UI {
         });
 
         setContent(layout);
+    }
+
+    private void onSuccesLogin(UserRole userRole) {
+        updateList();
     }
 
     void updateList() {

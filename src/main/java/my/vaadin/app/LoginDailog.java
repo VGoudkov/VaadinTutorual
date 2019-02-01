@@ -3,6 +3,8 @@ package my.vaadin.app;
 
 import com.vaadin.ui.*;
 
+import java.util.function.Function;
+
 
 /**
  * Демонстрационое окно логина.
@@ -13,18 +15,18 @@ public class LoginDailog extends Window {
 
     private UserRole role;
 
-    public LoginDailog(String caption, Component content) {
-        this(caption);
+    private LoginDailog(String caption, Component content) {
+        super(caption, content);
     }
 
-    public LoginDailog() {
-        this("Login");
+    private LoginDailog() {
+        super();
     }
 
-    public LoginDailog(String caption) {
-        super(caption);
+    public LoginDailog( IApply<UserRole> onSuccess) {
+        super("Login");
 
-        setModal( true);
+        setModal(true);
         setClosable(false);
         setResizable(false);
         center();
@@ -34,8 +36,8 @@ public class LoginDailog extends Window {
         FormLayout loginControls = new FormLayout();
         HorizontalLayout buttons = new HorizontalLayout();
         layout.addComponents(loginControls, buttons);
-        buttons.setWidth(100,Unit.PERCENTAGE);
-        buttons.setSpacing( true);
+        buttons.setWidth(100, Unit.PERCENTAGE);
+        buttons.setSpacing(true);
 
         TextField loginFld = new TextField("Login");
         PasswordField passwordFld = new PasswordField("Pasword");
@@ -43,13 +45,13 @@ public class LoginDailog extends Window {
 
         Button loginButton = new Button("Login!");
         Button cancelButton = new Button("Cancel");
-        buttons.addComponents( loginButton, cancelButton);
+        buttons.addComponents(loginButton, cancelButton);
 
         loginButton.setStyleName("v-button-primary");
         loginButton.addClickListener(e -> {
             final UserRole foundRole = UserService.getRoleFor(loginFld.getValue(), passwordFld.getValue());
             if (foundRole != null) {
-                role = foundRole;
+                onSuccess.apply(foundRole) ;
                 close();
             } else {
                 Notification.show("Auth error", Notification.Type.ERROR_MESSAGE);
