@@ -6,6 +6,7 @@
         <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
 
         <class>my.vaadin.app.Customer</class>
+        <class>my.vaadin.app.User</class>
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
@@ -23,7 +24,7 @@
             <!--update: update the schema.-->
             <!--create: creates the schema, destroying previous data.-->
             <!--create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped-->
-            <property name="hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>

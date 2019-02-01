@@ -7,6 +7,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import my.vaadin.app.Customer;
 import my.vaadin.app.CustomerService;
 import my.vaadin.app.CustomerStatus;
+import my.vaadin.app.UserService;
 
 public class CustomerForm extends FormLayout {
     private TextField firstName = new TextField("First name");
@@ -21,6 +22,7 @@ public class CustomerForm extends FormLayout {
     private MyUI myUI;
 
     private CustomerService service = CustomerService.getInstance();
+
     private Customer customer;
 
 

@@ -11,6 +11,7 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import my.vaadin.app.Customer;
 import my.vaadin.app.CustomerService;
+import my.vaadin.app.LoginDailog;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,6 +42,9 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
+        LoginDailog loginDailog = new LoginDailog();
+        addWindow( loginDailog);
 
         Label header = new Label("<b>ITDExpert</b> Vaadin sample app");
         header.setContentMode(ContentMode.HTML);

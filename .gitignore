@@ -4,3 +4,4 @@ out/
 target/
 .idea/workspace.xml
 .idea/tasks.xml
+./src/main/webapp/VAADIN/themes/mytheme/styles.css

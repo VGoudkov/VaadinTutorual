@@ -43,21 +43,6 @@ public class CustomerService {
     }
 
     /**
-     * Вставка объектов в БД в контексте <b>одной</b> транзакции
-     *
-     * @param em      контекст {@link EntityManager}
-     * @param objects список объектов для вставки
-     */
-    private static void db_persist(EntityManager em, Object... objects) {
-        final EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        for (Object o : objects) {
-            em.persist(o);
-        }
-        transaction.commit();
-    }
-
-    /**
      * @return all available Customer objects.
      */
     public synchronized List<Customer> findAll() {
@@ -197,6 +182,7 @@ public class CustomerService {
             save(c);
         }
     }
+
 
 //    private void generate500KRecords() {
 //        Random r = new Random(0);
