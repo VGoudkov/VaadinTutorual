@@ -40,6 +40,8 @@ public class MyUI extends UI {
     private Button clearFilterTextBtn = new Button(FontAwesome.TIMES);
 
     private CustomerForm form = new CustomerForm( this);
+    private UserRole role;
+
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -47,8 +49,11 @@ public class MyUI extends UI {
         LoginDailog loginDailog = new LoginDailog( this::onSuccesLogin);
         addWindow( loginDailog);
 
-        Label header = new Label("<b>ITDExpert</b> Vaadin sample app");
-        header.setContentMode(ContentMode.HTML);
+        Label headLbl = new Label("<b>ITDExpert</b> Vaadin sample app");
+        headLbl.setContentMode(ContentMode.HTML);
+        Button roleBtn = new Button("Show roles");
+        roleBtn.addClickListener(e->Notification.show(role.name()));
+        CssLayout header = new CssLayout(headLbl,roleBtn);
 
         final VerticalLayout layout = new VerticalLayout();
 
@@ -81,8 +86,6 @@ public class MyUI extends UI {
         layout.addComponents(header, toolbar, main);
 
 
-
-
         form.setVisible(false);
 
 
@@ -100,6 +103,7 @@ public class MyUI extends UI {
     }
 
     private void onSuccesLogin(UserRole userRole) {
+        this.role = userRole;
         updateList();
     }
 
